@@ -4,16 +4,11 @@ import Router from "./Router";
 
 const app = new App;
 const server = app.server;
-const corsOptions = {
-    origin: 'https://localhost:5173',
-    credentials: true,
-    optionsSuccessStatus: 200
-};
 
-server.use(cors(corsOptions));
-
+server.use(cors());
+server.use(app.exp.json());
+server.use(app.exp.urlencoded());
 server.use(Router);
-
 server.listen(3001, ()=>{
     console.log("Servidor Rodando");
 });
