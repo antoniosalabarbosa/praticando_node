@@ -47,4 +47,46 @@ Router.post("/postNew", (req, res)=>{
     };
 });
 
+Router.put("/editElement", (req, res)=>{
+    if(controller.dao && controller.dao.conn){
+        let data: pessoasBody = {
+            id: req.body.id,
+            nome: req.body.nome,
+            idade: req.body.idade
+        };
+
+        let sql = `UPDATE \`pessoas\` SET \`nome_pes\`='${data.nome}',\`idade_pes\`='${data.idade}' WHERE \`id_pes\`=${data.id}`;
+
+        controller.dao.conn.query(sql, (err)=>{
+            if(err){
+                throw err;
+
+            }else{
+                console.log("Alteração concluída!")
+                console.log(data);
+            }
+        });
+    }
+});
+
+Router.delete("/deleteElement", (req, res)=>{
+    if(controller.dao && controller.dao.conn){
+        let data: pessoasBody = {
+            id: req.body.id,
+            nome: req.body.nome,
+            idade: req.body.idade
+        };
+        
+        let sql = `DELETE FROM \`pessoas\` WHERE id_pes=${data.id}`;
+
+        controller.dao.conn.query(sql, (err)=>{
+            if(err){
+                throw err;
+            } else {
+                console.log("Registro deletado!!")
+            }
+        });
+    }
+});
+
 export default Router;

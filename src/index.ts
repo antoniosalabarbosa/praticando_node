@@ -9,6 +9,7 @@ server.use(cors());
 server.use(app.exp.json());
 server.use(app.exp.urlencoded());
 server.use(Router);
+
 server.listen(3001, ()=>{
     console.log("Servidor Rodando");
 });
